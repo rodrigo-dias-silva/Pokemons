@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <nav>
       <div>
-        Navbar
+        <img alt="PokéAPI" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" />
       </div>
     </nav>
   )
