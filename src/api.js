@@ -8,7 +8,7 @@ export async function searchPokemon(pokemon) {
   }
 }
 
-export async function getPokemons(limit = 50, offset = 0) {
+export async function getPokemons(limit = 30, offset = 0) {
   try {
     let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
     const response = await fetch(url);
