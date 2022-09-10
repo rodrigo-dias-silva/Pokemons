@@ -29,7 +29,7 @@ function Searchbar() {
       </div>
       <div>
         <button
-          className='bg-cyan-600 rounded h-11 text-white px-3 shadow-md '
+          className='bg-yellow-500 rounded h-11 text-white font-bold border-solid border-4 border-blue-700 px-3 shadow-md '
           onClick={onButtonClickHandler}
         >
           Buscar
