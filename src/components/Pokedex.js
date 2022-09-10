@@ -1,15 +1,32 @@
 import React from 'react'
+import Pokemon from './Pokemon'
 
-function Pokedex() {
+function Pokedex(props) {
+  const { pokemons, loading } = props;
+
   return (
     <div>
-      <div>
+      <div className='flex flex-row justify-between items-center p-5'>
         <h1>Pokedex</h1>
-      </div>
-      <div>
         <span>Página: </span>
       </div>
-    </div>
+
+      {loading ? (<div> Carregando...</div>)
+        :
+        (<div className='grid gap-3 grid-cols-3'>
+          {pokemons && pokemons.map((pokemon, index) => {
+            return (
+              <Pokemon
+                key={index}
+                pokemon={pokemon}
+              />
+            )
+          })}
+
+        </div>)
+      }
+
+    </div >
   )
 }
 
