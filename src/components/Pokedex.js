@@ -5,7 +5,7 @@ function Pokedex(props) {
   const { pokemons, loading } = props;
 
   return (
-    <div>
+    <div className='px-5'>
       <div className='flex flex-row justify-between items-center p-5'>
         <h1>Pokedex</h1>
         <span>Página: </span>
