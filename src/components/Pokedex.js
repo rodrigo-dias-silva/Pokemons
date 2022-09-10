@@ -1,14 +1,32 @@
 import React from 'react'
+import Pagination from './Pagination';
 import Pokemon from './Pokemon'
 
 function Pokedex(props) {
-  const { pokemons, loading } = props;
+  const { pokemons, loading, page, setPage, totalPages } = props;
+
+  const onLeftClickHandler = () => {
+    if (page > 0) {
+      setPage(page - 1)
+    }
+  }
+
+  const onRightClickHandler = () => {
+    if (page + 1 !== totalPages) {
+      setPage(page + 1)
+    }
+  }
 
   return (
     <div className='px-5'>
       <div className='flex flex-row justify-between items-center p-5'>
         <h1>Pokedex</h1>
-        <span>Página: </span>
+        <Pagination
+          page={page + 1}
+          totalPages={totalPages}
+          onLeftClick={onLeftClickHandler}
+          onRightClick={onRightClickHandler}
+        />
       </div>
 
       {loading ? (<div> Carregando...</div>)
