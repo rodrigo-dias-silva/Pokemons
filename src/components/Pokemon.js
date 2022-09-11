@@ -37,6 +37,7 @@ function Pokemon(props) {
             })}
           </div>
           <button
+            className='bg-white shadow-md p-1 items-center'
             onClick={onHeartClick}
           >
             {heart}

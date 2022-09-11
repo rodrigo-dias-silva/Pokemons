@@ -5,7 +5,7 @@ function Navbar() {
   const { favoritePokemons } = useContext(FavoriteContext)
 
   return (
-    <nav className='flex items-center justify-evenly flex-row h-24'>
+    <nav className='flex items-center justify-between flex-row h-24 px-5'>
       <div>
         <img
           className='w-40'
