@@ -3,6 +3,9 @@ import { getPokemonData, getPokemons } from './api';
 import Navbar from './components/Navbar';
 import Pokedex from './components/Pokedex';
 import Searchbar from './components/Searchbar';
+import { FavoriteProvider } from './contexts/favoriteContext';
+
+const favoriteKey = 'fav';
 
 function App() {
 
@@ -10,6 +13,7 @@ function App() {
   const [totalPages, setTotalPages] = useState('');
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   const itensPerPage = 21;
 
@@ -33,22 +37,52 @@ function App() {
     }
   }
 
+  const loadFavoritePokemons = () => {
+    const favPokemons = JSON.parse(window.localStorage.getItem(favoriteKey)) || [];
+    setFavorites(favPokemons);
+  }
+
+  useEffect(() => {
+    loadFavoritePokemons();
+  }, []);
+
   useEffect(() => {
     fetchPokemons();
-  }, [page])
+  }, [page]);
+
+  const updateFavoritePokemons = (name) => {
+    const updateFavorites = [...favorites];
+    const favoriteIndex = favorites.indexOf(name);
+
+    if (favoriteIndex >= 0) {
+      updateFavorites.splice(favoriteIndex, 1)
+    } else {
+      updateFavorites.push(name);
+    }
+
+    window.localStorage.setItem(favoriteKey, JSON.stringify(updateFavorites))
+    setFavorites(updateFavorites)
+  }
 
   return (
-    <div>
-      <Navbar />
-      <Searchbar />
-      <Pokedex
-        pokemons={pokemons}
-        loading={loading}
-        page={page}
-        setPage={setPage}
-        totalPages={totalPages}
-      />
-    </div>
+    <FavoriteProvider
+      value={{
+        favoritePokemons: favorites,
+        updateFavoritePokemons: updateFavoritePokemons,
+      }}
+    >
+      <div>
+        <Navbar />
+        <Searchbar />
+        <Pokedex
+          pokemons={pokemons}
+          loading={loading}
+          page={page}
+          setPage={setPage}
+          totalPages={totalPages}
+        />
+      </div>
+    </FavoriteProvider>
   );
 }
 

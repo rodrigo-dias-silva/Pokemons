@@ -1,11 +1,17 @@
 import { Heart } from 'phosphor-react';
-import React from 'react'
+import React, { useContext } from 'react'
+import FavoriteContext from '../contexts/favoriteContext';
 
 function Pokemon(props) {
+  const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext)
   const { pokemon } = props
   const onHeartClick = () => {
-    console.log("pode favoritar");
+    updateFavoritePokemons(pokemon.name)
   }
+
+  const heart = favoritePokemons.includes(pokemon.name)
+    ? <Heart size={16} weight={"fill"} />
+    : <Heart size={16} />
 
   return (
     <div className='flex shadow-md rounded gap-3 p-2'>
@@ -33,8 +39,7 @@ function Pokemon(props) {
           <button
             onClick={onHeartClick}
           >
-            <Heart size={16} />
-            <Heart size={16} weight={"fill"} />
+            {heart}
           </button>
         </div>
       </div>
